@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Presupuesto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .section-title {
+            background-color: #ddd;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .checkbox-group label {
+            margin-right: 10px;
+        }
+
+        .instructions {
+            font-size: 0.9em;
+            color: gray;
+        }
+
+        .section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h3 {
+            background-color: #e6f7ff;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            margin-top: 0;
+        }
+
+        ol li {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+
+        p.instructions {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Registrar Presupuesto</h2>
+
+    <table>
+        <tr>
+            <th>Paquete:</th>
+            <td>Gestion de reparaciones</td>
+            <th>Nombre del Caso de Uso:</th>
+            <td>Registrar presupuesto</td>
+            <th>No. De Orden:</th>
+            <td>12</td>
+        </tr>
+        <tr>
+            <th>Prioridad:</th>
+            <td colspan="5">
+                <label><input type="checkbox" name="prioridad" value="alta" checked> Alta</label>
+                <label><input type="checkbox" name="prioridad" value="media"> Media</label>
+                <label><input type="checkbox" name="prioridad" value="baja"> Baja</label>
+            </td>
+        </tr>
+        <tr>
+            <th>Complejidad:</th>
+            <td colspan="5">
+                <label><input type="checkbox" name="complejidad" value="simple"> Simple</label>
+                <label><input type="checkbox" name="complejidad" value="mediano"> Mediano</label>
+                <label><input type="checkbox" name="complejidad" value="complejo" checked> Complejo</label>
+                <label><input type="checkbox" name="complejidad" value="muy-complejo"> Muy Complejo</label>
+                <label><input type="checkbox" name="complejidad" value="extremadamente-complejo"> Extremadamente
+                    Complejo</label>
+            </td>
+        </tr>
+        <tr>
+            <th>Actor Principal:</th>
+            <td>Tecnico</td>
+            <th>Actor Secundario:</th>
+            <td colspan="3">No Aplica</td>
+        </tr>
+        <tr>
+            <th>Tipo de Caso de Uso:</th>
+            <td colspan="5">
+                <label><input type="checkbox" name="tipo" value="generico"> Genérico</label>
+                <label><input type="checkbox" name="tipo" value="concreto" checked> Concreto</label>
+            </td>
+        </tr>
+    </table>
+
+    <div class="section">
+        <h3>Objetivo</h3>
+        <p>Registrar un presupuesto detallado para una reparación o servicio solicitado por un cliente.</p>
+    </div>
+
+    <div class="section">
+        <h3>Flujo Básico</h3>
+        <ol>
+            <li><strong>Tecnico:</strong> Comienza cuando selecciona la opción Registrar Presupuesto.</li>
+            <li><strong>Sistema:</strong> Se le solicita al usuario completar un formulario con los datos correspondientes
+                </li>
+            <li><strong>Sistema:</strong> Proporciona una lista de clientes activos para que el Técnico elija al destinatario de la reparación. </li>
+            <li><strong>Sistema:</strong> Verifica que todos los campos estén completos y que los datos ingresados sean válidos.</li>
+            <li><strong>Tecnico:</strong> Indica los servicios y/o cambios que se realizarán en el equipo.</li>
+            <li><strong>Sistema:</strong> Muestra una lista de repuestos y materiales necesarios para la reparación, y el Técnico selecciona los que serán utilizados.</li>
+            <li><strong>Sistema:</strong> Calcula el costo total del presupuesto basándose en los servicios y repuestos seleccionados.</li>
+            <li><strong>Tecnico:</strong> Revisa el resumen del presupuesto y confirma que todo está correcto.</li>
+            <li><strong>Sistema:</strong> Solicita la confirmación final del Técnico para registrar el presupuesto.</li>
+            <li><strong>Tecnico:</strong> Confirma el registro del presupuesto.</li>
+            <li><strong>Sistema:</strong> Almacena el presupuesto en la base de datos y genera un reporte con los detalles del servicio y costos para que el cliente lo revise.</li>
+            <li><strong>Sistema:</strong> Notifica al cliente vía correo electrónico o sistema que el presupuesto ha sido generado y está disponible.</li>
+        </ol>      
+
+        <p class="instructions">Al finalizar, el reporte es validado. Fin del Caso de Uso.</p>
+    </div>
+    <div class="section">
+        <h3>Flujo Alternativo</h3>
+        <ol>
+           <p>A1: El cliente no está registrado.</p> 
+
+          <ul> Sistema: Muestra una alerta preguntando si se desea registrar un nuevo cliente.</ul>  
+           <ul>Técnico: Si elige registrar un nuevo cliente, el sistema despliega un formulario para completar los datos del cliente.
+        </ul> 
+        <ul>Sistema: Valida los datos ingresados y agrega al cliente a la base de datos.</ul>
+           <ul>Sistema: El nuevo cliente aparece en la lista de clientes activos, y el Técnico puede seleccionarlo para continuar con el registro del presupuesto.
+        </ul>             
+        <p>A2: El Técnico decide cancelar el caso de uso.</p>
+
+            <ul>Técnico: Selecciona la opción Cancelar durante cualquier etapa del flujo.</ul>
+            <ul>Sistema: Cancela el proceso sin guardar cambios y notifica al Técnico que el presupuesto no ha sido registrado.</ul>
+            <p>A3: El Técnico no confirma el registro del presupuesto.</p>
+
+            <ul>Sistema: Muestra una alerta informando que el presupuesto no ha sido registrado.</ul>
+           <ul> Técnico: Puede optar por revisar los datos nuevamente y confirmar el registro o cancelar el proceso.</ul>
+            <p>A4: Los datos ingresados en el formulario son inválidos o incompletos.</p>
+
+           <ul>Sistema: Muestra un mensaje indicando qué campos son incorrectos o están incompletos y solicita al Técnico corregir los datos.</ul> 
+           <ul>Técnico: Corrige los datos ingresados y vuelve a intentar el registro</ul> .</ol>
+
+        <p class="instructions">Al finalizar, el reporte es validado. Fin del Caso de Uso.</p>
+    </div>
+
+
+</body>
+
+</html>

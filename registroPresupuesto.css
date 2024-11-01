@@ -1,0 +1,187 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Color de fondo suave */
+    color: #333; /* Color de texto */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Centrar verticalmente */
+}
+
+/* Main Button */
+.button-container {
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+button {
+    background-color: #007bff; /* Color azul */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Content Container */
+.contenido {
+    display: none; /* Ocultar inicialmente */
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    max-width: 800px; /* Ancho máximo */
+    width: 100%; /* Ancho completo */
+    margin: 20px auto; /* Margen centrado */
+}
+
+/* General Form Styling */
+.contenedorGral {
+    display: flex;
+    flex-direction: column; /* Colocar elementos en columna */
+    gap: 20px; /* Espacio entre elementos */
+}
+
+/* Client Selector */
+.selectorCliente {
+    display: flex;
+    align-items: center; /* Alinear verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+}
+
+#selectClientes {
+    flex: 1; /* Ocupa el espacio restante */
+    padding: 8px;
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde gris claro */
+}
+
+/* Service Description */
+.servicioPresupuesto {
+    display: flex;
+    flex-direction: column; /* Colocar en columna */
+    gap: 10px; /* Espacio entre elementos */
+}
+
+.descripcionServicio {
+    width: 100%; /* Ancho completo */
+    min-height: 80px; /* Altura mínima */
+    padding: 10px;
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde gris claro */
+    resize: vertical; /* Permitir redimensionar verticalmente */
+}
+
+.precioServicio {
+    padding: 10px;
+    width: 100%; /* Ancho completo */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde gris claro */
+}
+
+/* Pieces Section */
+#contenedorPiezas {
+    display: flex;
+    gap: 20px; /* Espacio entre contenedores */
+}
+
+.contenedorPiezasNecesarias,
+.contenedorPiezasDisponibles {
+    flex: 1; /* Ancho flexible */
+    background-color: #f9f9f9; /* Fondo gris claro */
+    padding: 10px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde gris claro */
+}
+
+h3 {
+    font-size: 1.2em; /* Tamaño de fuente del encabezado */
+    margin-bottom: 10px; /* Margen inferior */
+}
+
+/* New Client Form */
+.clienteNuevo {
+    display: flex;
+    flex-direction: column; /* Colocar en columna */
+    gap: 10px; /* Espacio entre elementos */
+    border: 1px solid #ddd; /* Borde gris claro */
+    padding: 20px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #f9f9f9; /* Fondo gris claro */
+}
+
+.clienteNuevo input,
+.clienteNuevo label {
+    width: 100%; /* Ancho completo */
+    font-size: 14px; /* Tamaño de fuente */
+}
+
+.clienteNuevo input {
+    padding: 8px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde gris claro */
+}
+
+/* Total Amount Display */
+#montoTotal {
+    font-size: 1.2em; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    color: #007bff; /* Color azul */
+    display: flex;
+    align-items: center; /* Alinear verticalmente */
+    justify-content: space-between; /* Espacio entre elementos */
+    background-color: #e9ecef; /* Fondo gris claro */
+    padding: 10px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+#montoFinal {
+    font-size: 1.4em; /* Tamaño de fuente más grande */
+    color: #28a745; /* Color verde */
+}
+
+/* Action Buttons */
+#buttonAcciones {
+    display: flex; /* Mostrar en línea */
+    gap: 10px; /* Espacio entre botones */
+    justify-content: flex-end; /* Alinear a la derecha */
+}
+
+#btnCancelar {
+    background-color: #dc3545; /* Color rojo */
+    color: #fff; /* Color de texto blanco */
+}
+
+#btnConfirmar {
+    background-color: #28a745; /* Color verde */
+    color: #fff; /* Color de texto blanco */
+}
+
+#btnGenerar {
+    background-color: #007bff; /* Color azul */
+    color: #fff; /* Color de texto blanco */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .contenido {
+        padding: 15px; /* Espacio interno reducido */
+    }
+
+    #contenedorPiezas {
+        flex-direction: column; /* Colocar en columna en pantallas pequeñas */
+    }
+
+    #buttonAcciones {
+        flex-direction: column; /* Colocar en columna */
+        gap: 5px; /* Espacio entre botones */
+    }
+}
