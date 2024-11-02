@@ -31,9 +31,8 @@ button:hover {
     background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
 }
 
-/* Content Container */
 .contenido {
-    display: none; /* Ocultar inicialmente */
+    display: none;
     background-color: #ffffff; /* Fondo blanco */
     padding: 20px;
     border-radius: 8px; /* Bordes redondeados */
@@ -74,6 +73,7 @@ button:hover {
 .descripcionServicio {
     width: 100%; /* Ancho completo */
     min-height: 80px; /* Altura mínima */
+    max-height: 300px;
     padding: 10px;
     border-radius: 5px; /* Bordes redondeados */
     border: 1px solid #ddd; /* Borde gris claro */
@@ -128,6 +128,15 @@ h3 {
     padding: 8px; /* Espacio interno */
     border-radius: 5px; /* Bordes redondeados */
     border: 1px solid #ddd; /* Borde gris claro */
+}
+
+.piezasDisponibles{
+    max-height: 300px;
+    overflow: auto;
+}
+.piezasNecesarias{
+    max-height: 300px;
+    overflow: auto;
 }
 
 /* Total Amount Display */
