@@ -171,9 +171,128 @@ var clientes = [
 ];
 
 var clienteSelect = null;
+let tooltip, tooltipPrecio;
+
+
+
+// Funciones auxiliares para mostrar y ocultar los tooltips
+function showTooltip() {
+    tooltip.style.visibility = "visible";
+    tooltip.style.opacity = "1";
+}
+function hideTooltip() {
+    tooltip.style.visibility = "hidden";
+    tooltip.style.opacity = "0";
+}
+function showTooltipPrecio() {
+    tooltipPrecio.style.visibility = "visible";
+    tooltipPrecio.style.opacity = "1";
+}
+function hideTooltipPrecio() {
+    tooltipPrecio.style.visibility = "hidden";
+    tooltipPrecio.style.opacity = "0";
+}
+
+// Función auxiliar para mostrar alerta
+function showAlert(event) {
+    event.preventDefault();
+    alert("Este campo está deshabilitado y no es editable.");
+}
+
+let inhabilitarInputs=(descriServ, precioServ )=>{
+
+     // Deshabilitar el input de descripción
+    descriServ.disabled = true;
+    descriServ.style.cursor = "not-allowed";
+    descriServ.style.opacity = "0.5";
+
+    // Crear y agregar tooltip para descripción
+    tooltip = document.createElement("span");
+    tooltip.textContent = "Este campo está deshabilitado";
+    tooltip.style.visibility = "hidden";
+    tooltip.style.width = "120px";
+    tooltip.style.backgroundColor = "#333";
+    tooltip.style.color = "#fff";
+    tooltip.style.textAlign = "center";
+    tooltip.style.padding = "5px";
+    tooltip.style.borderRadius = "5px";
+    tooltip.style.position = "absolute";
+    tooltip.style.zIndex = "1";
+    tooltip.style.bottom = "125%";
+    tooltip.style.left = "50%";
+    tooltip.style.marginLeft = "-60px";
+    tooltip.style.opacity = "0";
+    tooltip.style.transition = "opacity 0.3s";
+    descriServ.parentElement.appendChild(tooltip);
+
+    descriServ.addEventListener("mouseenter", showTooltip);
+    descriServ.addEventListener("mouseleave", hideTooltip);
+    descriServ.addEventListener("click", showAlert);
+
+    // Deshabilitar el input de precio
+    precioServ.disabled = true;
+    precioServ.style.cursor = "not-allowed";
+    precioServ.style.opacity = "0.5";
+
+    // Crear y agregar tooltip para precio
+    tooltipPrecio = document.createElement("span");
+    tooltipPrecio.textContent = "Este campo está deshabilitado";
+    tooltipPrecio.style.visibility = "hidden";
+    tooltipPrecio.style.width = "120px";
+    tooltipPrecio.style.backgroundColor = "#333";
+    tooltipPrecio.style.color = "#fff";
+    tooltipPrecio.style.textAlign = "center";
+    tooltipPrecio.style.padding = "5px";
+    tooltipPrecio.style.borderRadius = "5px";
+    tooltipPrecio.style.position = "absolute";
+    tooltipPrecio.style.zIndex = "1";
+    tooltipPrecio.style.bottom = "125%";
+    tooltipPrecio.style.left = "50%";
+    tooltipPrecio.style.marginLeft = "-60px";
+    tooltipPrecio.style.opacity = "0";
+    tooltipPrecio.style.transition = "opacity 0.3s";
+    precioServ.parentElement.appendChild(tooltipPrecio);
+
+    precioServ.addEventListener("mouseenter", showTooltipPrecio);
+    precioServ.addEventListener("mouseleave", hideTooltipPrecio);
+    precioServ.addEventListener("click", showAlert);
+
+
+}
+
+let habilitarInputs=(descriServ, precioServ)=>{
+    descriServ.disabled = false;
+    precioServ.disabled = false;
+     // Habilitar y restaurar el input de descripción
+    descriServ.disabled = false;
+    descriServ.style.cursor = "auto";
+    descriServ.style.opacity = "1";
+    if (tooltip) {
+        tooltip.remove();
+    }
+    descriServ.removeEventListener("mouseenter", showTooltip);
+    descriServ.removeEventListener("mouseleave", hideTooltip);
+    descriServ.removeEventListener("click", showAlert);
+
+    // Habilitar y restaurar el input de precio
+    precioServ.disabled = false;
+    precioServ.style.cursor = "auto";
+    precioServ.style.opacity = "1";
+    if (tooltipPrecio) {
+        tooltipPrecio.remove();
+    }
+    precioServ.removeEventListener("mouseenter", showTooltipPrecio);
+    precioServ.removeEventListener("mouseleave", hideTooltipPrecio);
+    precioServ.removeEventListener("click", showAlert);
+}
 
 // Mostrar lista de clientes
 let mostrarCliente=()=> {
+
+    let descriServ = document.getElementById('descripcionServicio');
+    let precioServ = document.getElementById('precioServicio');
+    inhabilitarInputs(descriServ, precioServ);
+
     let select = document.getElementById('selectClientes');
     
     // Limpiar las opciones existentes en el select antes de agregar nuevas
@@ -201,6 +320,7 @@ let mostrarCliente=()=> {
         if (clienteId) { // Asegurarse de que se seleccionó un cliente
             clienteSelect = clientes.find((client) => client.id == clienteId); // Buscar el cliente por ID
             console.log("Cliente seleccionado:", clienteSelect); // Muestra el cliente seleccionado en la consola
+            habilitarInputs(descriServ, precioServ)
         } else {
             clienteSelect = null; // Reiniciar si no hay selección válida
             console.log("Ningún cliente seleccionado");
@@ -401,17 +521,17 @@ function seleccionarPieza(index) {
     actualizarTotal();
 }
 
-var montoReparacionFinal=0;
+var montoReparacionFinalVar=0;
 
 function actualizarTotal() {
-    console.log("Entra en actualizarTotal()");
+    // console.log("Entra en actualizarTotal()");
 
     // Calcular el monto total de reparación de las piezas seleccionadas
     const montoReparacionFinal = piezasSeleccionadas.reduce((total, pieza) => {
         return total + (pieza.precio * pieza.cantidad);
     }, 0);
 
-    console.log("Monto total de reparación:", montoReparacionFinal);
+    // console.log("Monto total de reparación:", montoReparacionFinal);
 
     // Obtener el elemento del precio del servicio
     let totalServicioElement = document.getElementById('precioServicio');
@@ -427,9 +547,11 @@ function actualizarTotal() {
     
     // Calcular el total de las piezas seleccionadas y sumar el servicio
     let totalPrecio = montoReparacionFinal + totalServicio;
+    montoReparacionFinalVar = totalPrecio;
 
     // Actualizar el valor en el HTML
-    montoFinalElement.innerHTML = totalPrecio.toFixed(2);
+    montoFinalElement.innerHTML = `$${totalPrecio.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
 }
 
 
@@ -454,33 +576,6 @@ function actualizarPiezas(){
     })
 }
 
-// function validarCampos() {
-//     let esValido = true;
-//     let mensajeError = "";
-
-//     // Aquí asume que hay campos con los IDs correspondientes
-//     let precioServicio = document.getElementById("precioServicio").value;
-//     let piezasSeleccionadas = document.getElementById("piezasNecesarias").children.length; // Número de piezas seleccionadas
-
-//     // Verificar que el precio del servicio no esté vacío y sea un número positivo
-//     if (precioServicio.trim() === "" || isNaN(precioServicio) || parseFloat(precioServicio) <= 0) {
-//         esValido = false;
-//         mensajeError += "El precio del servicio debe ser un número positivo.\n";
-//     }
-
-//     // Verificar que haya al menos una pieza seleccionada
-//     if (piezasSeleccionadas === 0) {
-//         esValido = false;
-//         mensajeError += "Debes seleccionar al menos una pieza.\n";
-//     }
-
-//     // Mostrar el mensaje de error si no es válido
-//     if (!esValido) {
-//         alert(mensajeError); // Cambia esto por una alerta personalizada si lo prefieres
-//     }
-
-//     return esValido; // Devuelve true si todo es válido, false si hay errores
-// }
 function eliminarCompletoPieza(idPieza) {
     piezasSeleccionadas = piezasSeleccionadas.filter(pieza => pieza.id !== idPieza);
 
@@ -585,12 +680,6 @@ let confirmarPresupuesto = () => {
             mensajeError += "El precio del servicio debe ser un número positivo.\n";
         }
 
-        // Verificar que haya al menos una pieza seleccionada
-        if (piezasSeleccionadas === 0) {
-            esValido = false;
-            mensajeError += "Debes seleccionar al menos una pieza.\n";
-        }
-
         // Verificar que haya un cliente seleccionado
         if (!clienteSeleccionado) {
             esValido = false;
@@ -687,7 +776,7 @@ let cancelarPresupuesto = () => {
 };
 
 async function generarPDF() {
-   const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf;
 
     const doc = new jsPDF();
 
@@ -701,12 +790,8 @@ async function generarPDF() {
     let fechaEmision = new Date();
     let fechaVencimiento = new Date(fechaEmision); 
     fechaVencimiento.setDate(fechaEmision.getDate() + 15);
-     console.log(fechaEmision)
-    console.log(fechaVencimiento)
     let fechaEmisionFormateada = formatDate(fechaEmision);
     let fechaVencimientoFormateada = formatDate(fechaVencimiento);
-    console.log(fechaEmisionFormateada)
-    console.log(fechaVencimientoFormateada)
 
     // Nombre de la empresa con fondo negro y texto blanco
     doc.setFillColor(0, 0, 0); // Fondo negro
@@ -719,12 +804,12 @@ async function generarPDF() {
     doc.setTextColor(0, 0, 0); // Cambia el texto a negro
     doc.setFontSize(22); // Más pequeño que el nombre de la empresa
     doc.setFont('Helvetica', 'bold');
-    doc.text("Presupuesto de Reparación", 40, 40);
+    doc.text("Presupuesto de Reparación", 15, 40);
 
     // Fecha de emisión
     doc.setFontSize(12);
     doc.setFont('Helvetica', 'normal');
-    doc.text(`Fecha de Emisión: ${fechaEmisionFormateada}`, 150, 40);
+    doc.text(`Fecha de Emisión: ${fechaEmisionFormateada}`, 135, 40);
 
     // Información del cliente
     const startY = 50;
@@ -732,63 +817,65 @@ async function generarPDF() {
     const sectionHeight = 35; // Altura del contenedor de información del cliente
     const paddingBottom = 5;
     const sectionY = startY + sectionHeight + paddingBottom;
-    
 
     doc.setFillColor(200, 200, 200); // Fondo gris claro
-    doc.rect(15, startY, 170, sectionHeight + paddingBottom, 'F'); // Dibuja el fondo gris claro
+    doc.rect(15, startY, 100, sectionHeight + paddingBottom, 'F'); // Dibuja el fondo gris claro
 
     doc.setFont('Helvetica', 'bold');
     doc.setTextColor(0, 0, 0); // Texto negro
     doc.text(`Cliente: ${clienteSelect.nombre} ${clienteSelect.apellido}`, 20, startY + 7);
     doc.text(`Teléfono: ${clienteSelect.telefono}`, 20, startY + 14);
     doc.text(`Correo: ${clienteSelect.mail}`, 20, startY + 21);
-    doc.text(`Fecha de Emisión: ${fechaEmisionFormateada}`, 20, startY + 28);
-    doc.text(`Fecha de Vencimiento: ${fechaVencimientoFormateada}`, 20, startY + 35);
+    doc.text(`Fecha de Vencimiento: ${fechaVencimientoFormateada}`, 20, startY + 28);
 
-    // Detalle de piezas
-    const detalleY = sectionY + padding + 10;
-    doc.setFontSize(14);
-    doc.text("Detalle de Piezas:", 20, detalleY);
-    const piezasHeight = 10 + piezasSeleccionadas.length * 10 + 10;
-    // Dibuja borde para el detalle de piezas
-    doc.rect(15, detalleY - 10, 180, piezasHeight, 'S'); // Dibuja el borde
+    // ** Sección de servicio aplicado justo debajo de los datos del cliente **
+    const descripcionServicio = document.getElementById('descripcionServicio').value; // Obtener descripción del servicio
+    const precioServicio = document.getElementById('precioServicio').value; // Obtener precio del servicio
+    const servicioStartY = startY + sectionHeight + 20; // Posición Y para la sección de servicio
 
-    doc.setFontSize(12);
-    piezasSeleccionadas.forEach((pieza, index) => {
-        doc.text(`- ${pieza.nombre}: $${pieza.precio}`, 20, detalleY + 10 + index * 10);
-    });
+    doc.setFont('Helvetica', 'bold');
+    doc.text("Servicio Aplicado", 15, servicioStartY);
+    doc.setFont('Helvetica', 'normal');
+    doc.text(`Descripción del Servicio: ${descripcionServicio}`, 15, servicioStartY + 10);
+    doc.text(`Precio del Servicio: $${precioServicio}`, 15, servicioStartY + 20);
 
     // Encabezado de productos
-    const headerY = detalleY + 10 + piezasSeleccionadas.length * 10 + 10;
+    const headerY = servicioStartY + 40; // Cambiar la posición Y para el encabezado de productos
     doc.setFontSize(12);
     doc.setFont('Helvetica', 'bold');
-    doc.text("Producto              Precio      Cantidad    Total", 15, headerY);
+    doc.text("Producto", 15, headerY);
+    doc.text("Precio", 90, headerY);
+    doc.text("Cantidad", 130, headerY);
+    doc.text("Total", 170, headerY);
     doc.line(15, headerY + 2, 195, headerY + 2); // Línea bajo encabezado
 
     // Lista de productos
-    let productos = [
-        // Simulación de productos
-        { nombre: 'Producto A', precio: 100, cantidad: 1, total: 100 },
-        { nombre: 'Producto B', precio: 50, cantidad: 2, total: 100 },
-        // Puedes agregar más productos
-    ];
-
-    productos.forEach((producto, index) => {
+    piezasSeleccionadas.forEach((producto, index) => {
         const productoY = headerY + 10 + index * 10;
-        doc.text(`${producto.nombre}               $${producto.precio}          ${producto.cantidad}         $${producto.total}`, 15, productoY);
+        doc.setFont('Helvetica', 'normal');
+        doc.text(producto.nombre, 15, productoY); // Columna de producto
+        doc.text(`$${producto.precio}`, 90, productoY); // Columna de precio
+        doc.text(`${producto.cantidad}`, 130, productoY); // Columna de cantidad
+        doc.text(`$${(producto.cantidad * producto.precio).toFixed(2)}`, 170, productoY); // Columna de total
     });
 
     // Total y fecha de vencimiento
-    const totalY = headerY + 10 + productos.length * 10 + 10;
+    const totalY = headerY + 10 + piezasSeleccionadas.length * 10 + 10;
     doc.setFont('Helvetica', 'bold');
-    doc.text(`Subtotal: $${montoReparacionFinal}`, 15, totalY);
-    doc.text(`Total: $${montoReparacionFinal}`, 15, totalY + 10);
-    doc.text(`Fecha de Vencimiento: ${fechaVencimiento.toLocaleDateString()}`, 15, totalY + 20);
+    doc.text(`Subtotal: $${montoReparacionFinalVar.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, 15, totalY);
+    doc.text(`Total: $${montoReparacionFinalVar.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, 15, totalY + 10);
+
+    // ** Establecer el nombre del archivo **
+const nombreArchivo = `${clienteSelect.nombre}_${clienteSelect.apellido}_presupuesto.pdf`;
 
     // Guardar el PDF
-                    // Abrir el PDF en una nueva ventana
     const pdfUrl = doc.output("bloburl");
-    window.open(pdfUrl, '_blank');
+    const a = document.createElement('a');
+    a.href = pdfUrl;
+    a.download = nombreArchivo; // Nombre del archivo
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 
     // doc.save(`presupuesto_reparacion_${fechaEmisionFormateada}.pdf`);
 

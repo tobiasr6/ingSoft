@@ -22,72 +22,80 @@
         <div class="contenedorGral">
             <div id="selectorCliente" class="selectorCliente">
                 <label for="selectClientes"></label>
-                <select name="selectClientes" id="selectClientes" >
+                <select name="selectClientes" id="selectClientes">
                     <option value="" selected disabled>Seleccione un cliente</option>
                 </select>
-                <button type="button" onclick="mostrarRegistroCliente()"><i class="fa-solid fa-user-plus"></i> Nuevo Cliente</button>
-        </div>
-        <div class="clienteNuevo" id="clienteNuevo">
-            <form class="clienteNuevo" id="clienteNuevoForm" onsubmit="registrarCliente(event)">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="nombre form-control" id="nombre" name="nombre" required>
-
-                <label for="apellido">Apellido:</label>
-                <input type="text" class="apellido" id="apellido" name="apellido" required>
-
-                <label for="telefono">Teléfono:</label>
-                <input type="text" class="telefono" id="telefono" name="telefono">
-
-                <label for="direccion">Dirección:</label>
-                <input type="text" class="direccion" id="direccion" name="direccion" required>
-
-                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                <input type="date" class="fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento" required>
-
-                <label for="mail">Correo Electrónico:</label>
-                <input type="email" class="mail" id="mail" name="mail" required>
-
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
-
-        <div id="servicioPresupuesto" class="servicioPresupuesto">
-            <label for="descripcionServicio"></label>
-            <textarea class="descripcionServicio" name="descripcionServicio" id="descripcionServicio" 
-            placeholder="Descripcion del servicio a realizar..."></textarea>
-            <input type="number" id="precioServicio" oninput="limitarLongitud(this)" class="precioServicio" placeholder="$ Precio del servicio" >
-
-        </div>
-        <div id="contenedorPiezas">
-            <div class="contenedorPiezasDisponibles" id="contenedorPiezasDisponibles">
-                <h3>Piezas disponibles</h3>
-                <div class="piezasDisponibles" id="piezasDisponibles">
-                    
-    
-                </div>
-                
+                <button type="button" onclick="mostrarRegistroCliente()"><i class="fa-solid fa-user-plus"></i> Nuevo
+                    Cliente</button>
             </div>
-            <div class="contenedorPiezasNecesarias" id="contenedorPiezasNecesarias">
-                <h3>Piezas necesarias</h3>
-                <div class="piezasNecesarias" id="piezasNecesarias">
-                    
-    
+            <div class="clienteNuevo" id="clienteNuevo">
+                <form class="clienteNuevo" id="clienteNuevoForm" onsubmit="registrarCliente(event)">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="nombre form-control" id="nombre" name="nombre" required>
+
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" class="apellido" id="apellido" name="apellido" required>
+
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" class="telefono" id="telefono" name="telefono">
+
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" class="direccion" id="direccion" name="direccion" required>
+
+                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" class="fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento" required>
+
+                    <label for="mail">Correo Electrónico:</label>
+                    <input type="email" class="mail" id="mail" name="mail" required>
+
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+
+            <div id="servicioPresupuesto" class="servicioPresupuesto">
+                <label for="descripcionServicio"></label>
+                <textarea class="descripcionServicio" name="descripcionServicio" id="descripcionServicio"
+                    placeholder="Descripcion del servicio a realizar..."></textarea>
+                <input type="number" id="precioServicio" oninput="limitarLongitud(this)" class="precioServicio"
+                    placeholder="$ Precio del servicio">
+
+            </div>
+            <div id="contenedorPiezas">
+                <div class="contenedorPiezasDisponibles" id="contenedorPiezasDisponibles">
+                    <h3>Piezas disponibles</h3>
+                    <div class="piezasDisponibles" id="piezasDisponibles">
+
+
+                    </div>
+
                 </div>
-                
+                <div class="contenedorPiezasNecesarias" id="contenedorPiezasNecesarias">
+                    <h3>Piezas necesarias</h3>
+                    <div class="piezasNecesarias" id="piezasNecesarias">
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div id="montoTotal">
+                <p>Total Estimado:</p>
+                <p id="spanMontoFinal">$
+                <p id="montoFinal" maxlenght="9">0.00</p>
+                </p>
+            </div>
+            <div id="buttonAcciones">
+                <button id="btnConfirmar" class="btn btn-success" onclick="confirmarPresupuesto()"> <i
+                        class="fa-solid fa-check"></i> Confirmar</button>
+                <button id="btnGenerar" class="btn btn-primary" onclick="generarPDF()"> <i
+                        class="fa-solid fa-download"></i> Generar PDF</button>
+                <button id="btnCancelar" class="btn btn-danger" onclick="cancelarPresupuesto()"> <i
+                        class="fa-solid fa-xmark"></i> Cancelar</button>
+
             </div>
         </div>
-
-
-        <div id="montoTotal"> 
-            <p>Total Estimado:</p>
-            <p id="spanMontoFinal">$ <p id="montoFinal" maxlenght="9">0.00</p></p>
-        </div>
-        <div id="buttonAcciones">
-            <button id="btnConfirmar" class="btn btn-success" onclick="confirmarPresupuesto()"> <i class="fa-solid fa-check"></i> Confirmar</button>
-            <button id="btnGenerar"  class="btn btn-primary" onclick="generarPDF()"> <i class="fa-solid fa-download"></i> Generar PDF</button>
-            <button id="btnCancelar" class="btn btn-danger" onclick="cancelarPresupuesto()"> <i class="fa-solid fa-xmark"></i> Cancelar</button>
-
-        </div>
-    </div>
 </body>
+
 </html>
