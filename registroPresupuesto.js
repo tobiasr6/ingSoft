@@ -21,21 +21,62 @@ function limitarLongitud(input) {
 
 function actualizarMonto() {
     console.log("Actualizando monto...");
-    actualizarTotal(); // Llama a la función que ya tienes para actualizar el total
+    actualizarTotal(); 
 }
 document.getElementById("precioServicio").addEventListener("input", actualizarMonto);
 
 
 function mostrarFormulario(){
+    let botonNuevoPresupuesto = document.getElementById('btnNuevoPresupuesto');
+    botonNuevoPresupuesto.style.display = 'none';
     let divForm = document.getElementById('contenido');
     let boton= document.getElementById('btnMostrarForm')
+    let selectClientes = document.getElementById('selectClientes');
+    selectClientes.style.display = 'block';
+    selectClientes.style.cursor= 'pointer';
+    selectClientes.disabled=false
+    let botonAgregarCliente= document.getElementById('btnAgregarCliente');
+    botonAgregarCliente.style.display = 'block';
+    let descripcion= document.getElementById('descripcionServicio');
+    descripcion.value=""
+    let precio= document.getElementById('precioServicio');
+    precio.value="";
     divForm.style.display= "block";
     boton.style.display = "none";
+    piezasSeleccionadas =[];
+    document.querySelectorAll("#seleccionarPieza").forEach(button => button.style.display = "block");
+    document.querySelectorAll("#btnEliminarUnidad").forEach(button => button.style.display = "block");
+    document.querySelectorAll("#btnEliminarPieza").forEach(button => button.style.display = "block");
+    let botonCancelar= document.getElementById("btnCancelar");
+    botonCancelar.style.display="block";
+    let btnDowloadPDF = document.getElementById('btnGenerar');
+    btnDowloadPDF.disabled = true;
+    btnDowloadPDF.style.cursor = "not-allowed";
+    btnDowloadPDF.style.opacity = "0.6"; 
+    let botonConfirmar= document.getElementById("btnConfirmar");
+    botonConfirmar.style.display="block";
+
+
+    actualizarTotal();
     mostrarCliente();
     mostrarPiezas();
+    actualizarPiezas();
+    
 }
 
 function mostrarRegistroCliente(){
+    let apellido= document.getElementById("apellido")
+    apellido.value=""
+    let nombre= document.getElementById("nombre")
+    nombre.value=""
+    let telefono= document.getElementById("telefono")
+    telefono.value=""
+    let direccion= document.getElementById("direccion")
+    direccion.value=""
+    let fechaNacimiento= document.getElementById("fechaNacimiento")
+    fechaNacimiento.value=""
+    let mail= document.getElementById("mail")
+    mail.value=""
     console.log("cliente mostrado")
     let divRegistroCliente = document.getElementById('clienteNuevo');
     divRegistroCliente.style.display = 'block';
@@ -479,7 +520,7 @@ function mostrarPiezas(){
             Descripción: ${pieza.descripcion}<br>
             Stock: ${pieza.stock}<br>
             Precio: $${pieza.precio} <br>
-            <button onclick="seleccionarPieza(${index})">Seleccionar</button>
+            <button id="seleccionarPieza" onclick="seleccionarPieza(${index})">Seleccionar</button>
             <hr>
         `; 
         divPiezasDisponibles.appendChild(piezaDiv);
@@ -566,8 +607,8 @@ function actualizarPiezas(){
             Descripción: ${pieza.descripcion}<br>
             Precio: $${pieza.precio} <br>
             Cantidad: ${pieza.cantidad || 1}
-            <button style="background-color: red; color: white;" onclick="eliminarPieza(${pieza.id})"><i class="fa-solid fa-minus"></i></button>
-            <button style="background-color: red; color: white;" onclick="eliminarCompletoPieza(${pieza.id})"><i class="fa-solid fa-trash"></i></button>
+            <button style="background-color: red; color: white;" id="btnEliminarUnidad" onclick="eliminarPieza(${pieza.id})"><i class="fa-solid fa-minus"></i></button>
+            <button style="background-color: red; color: white;" id="btnEliminarPieza" onclick="eliminarCompletoPieza(${pieza.id})"><i class="fa-solid fa-trash"></i></button>
 
             <hr>
             `;
@@ -647,7 +688,8 @@ function registrarCliente(event){
     };
 
     clientes.push(newCliente);
-    Swal.fire("Exito", "Cliente Registrado con Existo");
+    Swal.fire("Exito", "Cliente Registrado con exito");
+    mostrarFormulario();
     ocultarRegistroCliente();
 }
 
@@ -660,6 +702,17 @@ let validarExistenciaUser=(data)=>{
 };
 
 let confirmarPresupuesto = () => {
+    let precioInput = document.getElementById("precioServicio");
+    let clienteSeleccionadoInput = document.getElementById("selectClientes");
+    let descripcionInput = document.getElementById("descripcionServicio");
+    let botonAgregarCliente=  document.getElementById("btnAgregarCliente")
+    let botonNuevoPresupuesto= document.getElementById("btnNuevoPresupuesto");
+    let botonCancelar= document.getElementById("btnCancelar");
+    let botonConfirmar= document.getElementById("btnConfirmar");
+
+  
+
+
     // Función para validar los campos
     const validarCampos = () => {
         let esValido = true;
@@ -670,6 +723,8 @@ let confirmarPresupuesto = () => {
         let piezasSeleccionadas = document.getElementById("piezasNecesarias").children.length; // Número de piezas seleccionadas
         let clienteSeleccionado = document.getElementById("selectClientes").value; // ID del cliente seleccionado
         let descripcion = document.getElementById("descripcionServicio").value; // Descripción del presupuesto
+        
+        
 
         // Verificar que el precio del servicio no esté vacío
         if (precioServicio.trim() === "") {
@@ -722,6 +777,25 @@ let confirmarPresupuesto = () => {
                 btnDowloadPDF.disabled = false;
                 btnDowloadPDF.style.cursor = "pointer";
                 btnDowloadPDF.style.opacity = "1"; 
+                precioInput.disabled = true;
+                precioInput.style.cursor = "not-allowed";
+                precioInput.style.opacity = "0.8";
+                clienteSeleccionadoInput.disabled = true;
+                clienteSeleccionadoInput.style.cursor = "not-allowed";
+                clienteSeleccionadoInput.style.opacity = "0.8";
+                descripcionInput.disabled = true;
+                descripcionInput.style.cursor = "not-allowed";
+                descripcionInput.style.opacity = "0.8";
+                document.querySelectorAll("#seleccionarPieza").forEach(button => button.style.display = "none");
+                document.querySelectorAll("#btnEliminarUnidad").forEach(button => button.style.display = "none");
+                document.querySelectorAll("#btnEliminarPieza").forEach(button => button.style.display = "none");
+                botonAgregarCliente.style.display="none";
+                botonNuevoPresupuesto.style.display="block";
+                botonCancelar.style.display="none";
+                botonConfirmar.style.display="none";
+
+                
+
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 // Si el usuario cancela
                 console.log("Presupuesto cancelado");
@@ -746,18 +820,22 @@ let cancelarPresupuesto = () => {
         if (result.isConfirmed) {
             // Si el usuario confirma la cancelación
             console.log("Presupuesto cancelado");
-            clienteSelect = null;
+            clienteSelect = 'Seleccione un cliente';
             mostrarCliente();
             piezasSeleccionadas = [];
             mostrarPiezas();
             montoReparacionFinal = 0;
             ocultarRegistroCliente();
-
-            // Ocultar el formulario de cliente y mostrar el contenido principal
-            let divContenido = document.getElementById('contenido');
-            divContenido.style.display = 'block';
-            let divFormCliente = document.getElementById('clienteNuevo');
-            divFormCliente.style.display = "none";
+            let descripcion= document.getElementById('descripcionServicio')
+            descripcion.value="";
+            let precioServicio=document.getElementById('precioServicio');
+            precioServicio.value="";
+            actualizarTotal();
+            actualizarPiezas();
+            // let divContenido = document.getElementById('contenido');
+            // divContenido.style.display = 'block';
+            // let divFormCliente = document.getElementById('clienteNuevo');
+            // divFormCliente.style.display = "none";
 
             // Deshabilitar el botón de generar PDF
             let btnDowloadPDF = document.getElementById('btnGenerar');
@@ -765,8 +843,7 @@ let cancelarPresupuesto = () => {
             btnDowloadPDF.style.cursor = "not-allowed";
             btnDowloadPDF.style.opacity = "0.6"; 
 
-            // Recargar la página
-            window.location.reload();
+            
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             // Si el usuario elige continuar y no cancelar
             console.log("Cancelación del presupuesto anulada");
@@ -866,7 +943,7 @@ async function generarPDF() {
     doc.text(`Total: $${montoReparacionFinalVar.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, 15, totalY + 10);
 
     // ** Establecer el nombre del archivo **
-const nombreArchivo = `${clienteSelect.nombre}_${clienteSelect.apellido}_presupuesto.pdf`;
+const nombreArchivo = `${clienteSelect.nombre}${clienteSelect.apellido}_${fechaEmisionFormateada}presupuesto.pdf`;
 
     // Guardar el PDF
     const pdfUrl = doc.output("bloburl");

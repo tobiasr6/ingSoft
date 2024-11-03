@@ -15,9 +15,85 @@
 </head>
 
 <body>
+    <div class="area"></div><nav class="main-menu" style="position: fixed;">
+        <ul>
+            <li>
+                <a href="#">
+                    <i class="fa fa-home fa-2x"></i>
+                    <span class="nav-text">
+                       Home
+                    </span>
+                </a>
+              
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fa fa-2x fa-file-invoice-dollar"></i>
+                    <span class="nav-text">
+                        Registrar presupuesto
+                    </span>
+                </a>
+                
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fa fa-handshake fa-2x"></i>
+                    <span class="nav-text">
+                        Clientes
+                    </span>
+                </a>
+                
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fa fa-users fa-2x"></i>
+                    <span class="nav-text">
+                        Empleados
+                    </span>
+                </a>
+               
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-2x fa-cart-shopping"></i>
+                    <span class="nav-text">
+                        Catalogo
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-truck-fast fa-2x"></i>
+                    <span class="nav-text">
+                       Proveedores
+                    </span>
+                </a>
+            </li>
+            <li>
+               <a href="#">
+                <i class="fa fa-2x fa-box-open"></i>
+                    <span class="nav-text">
+                        Inventario
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="logout">
+            <li>
+               <a href="#">
+                     <i class="fa fa-power-off fa-2x"></i>
+                    <span class="nav-text">
+                        Logout
+                    </span>
+                </a>
+            </li>  
+        </ul>
+    </nav>
     <div class="button-container">
         <button id="btnMostrarForm" onclick="mostrarFormulario()">Registrar Presupuesto</button>
     </div>
+    <button id="btnNuevoPresupuesto" onclick="mostrarFormulario()" class="btnNuevoPresupuesto">Nuevo Presupuesto</button>
     <div class="contenido" id="contenido">
         <div class="contenedorGral">
             <div id="selectorCliente" class="selectorCliente">
@@ -25,7 +101,7 @@
                 <select name="selectClientes" id="selectClientes">
                     <option value="" selected disabled>Seleccione un cliente</option>
                 </select>
-                <button type="button" onclick="mostrarRegistroCliente()"><i class="fa-solid fa-user-plus"></i> Nuevo
+                <button type="button" id="btnAgregarCliente" onclick="mostrarRegistroCliente()"><i class="fa-solid fa-user-plus"></i> Nuevo
                     Cliente</button>
             </div>
             <div class="clienteNuevo" id="clienteNuevo">
@@ -53,9 +129,10 @@
             </div>
 
             <div id="servicioPresupuesto" class="servicioPresupuesto">
-                <label for="descripcionServicio"></label>
+                <label style="margin-left: 5px;" for="descripcionServicio">Descripción</label>
                 <textarea class="descripcionServicio" name="descripcionServicio" id="descripcionServicio"
                     placeholder="Descripcion del servicio a realizar..."></textarea>
+                    <label for="precioServicio">Costo del servicio (sin contar piezas)</label>
                 <input type="number" id="precioServicio" oninput="limitarLongitud(this)" class="precioServicio"
                     placeholder="$ Precio del servicio">
 
@@ -82,8 +159,7 @@
 
             <div id="montoTotal">
                 <p>Total Estimado:</p>
-                <p id="spanMontoFinal">$
-                <p id="montoFinal" maxlenght="9">0.00</p>
+                <p id="montoFinal" maxlenght="9">$0.00</p>
                 </p>
             </div>
             <div id="buttonAcciones">
