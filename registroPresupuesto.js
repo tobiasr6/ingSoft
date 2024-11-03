@@ -64,6 +64,8 @@ function mostrarFormulario(){
     
 }
 
+
+
 function mostrarRegistroCliente(){
     let apellido= document.getElementById("apellido")
     apellido.value=""

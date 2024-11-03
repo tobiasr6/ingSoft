@@ -15,16 +15,17 @@
 </head>
 
 <body>
-    <div class="area"></div><nav class="main-menu" style="position: fixed;">
+    <div class="area"></div>
+    <nav class="main-menu" style="position: fixed;">
         <ul>
             <li>
                 <a href="#">
                     <i class="fa fa-home fa-2x"></i>
                     <span class="nav-text">
-                       Home
+                        Home
                     </span>
                 </a>
-              
+
             </li>
             <li class="has-subnav">
                 <a href="#">
@@ -33,7 +34,7 @@
                         Registrar presupuesto
                     </span>
                 </a>
-                
+
             </li>
             <li class="has-subnav">
                 <a href="#">
@@ -42,7 +43,7 @@
                         Clientes
                     </span>
                 </a>
-                
+
             </li>
             <li class="has-subnav">
                 <a href="#">
@@ -51,7 +52,7 @@
                         Empleados
                     </span>
                 </a>
-               
+
             </li>
             <li>
                 <a href="#">
@@ -65,13 +66,13 @@
                 <a href="#">
                     <i class="fa fa-truck-fast fa-2x"></i>
                     <span class="nav-text">
-                       Proveedores
+                        Proveedores
                     </span>
                 </a>
             </li>
             <li>
-               <a href="#">
-                <i class="fa fa-2x fa-box-open"></i>
+                <a href="#">
+                    <i class="fa fa-2x fa-box-open"></i>
                     <span class="nav-text">
                         Inventario
                     </span>
@@ -81,19 +82,19 @@
 
         <ul class="logout">
             <li>
-               <a href="#">
-                     <i class="fa fa-power-off fa-2x"></i>
+                <a href="#">
+                    <i class="fa fa-power-off fa-2x"></i>
                     <span class="nav-text">
                         Logout
                     </span>
                 </a>
-            </li>  
+            </li>
         </ul>
     </nav>
     <div class="button-container">
         <button id="btnMostrarForm" onclick="mostrarFormulario()">Registrar Presupuesto</button>
     </div>
-    <button id="btnNuevoPresupuesto" onclick="mostrarFormulario()" class="btnNuevoPresupuesto">Nuevo Presupuesto</button>
+    <button id="btnNuevoPresupuesto" class="btnNuevoPresupuesto">Nuevo Presupuesto</button>
     <div class="contenido" id="contenido">
         <div class="contenedorGral">
             <div id="selectorCliente" class="selectorCliente">
@@ -101,7 +102,8 @@
                 <select name="selectClientes" id="selectClientes">
                     <option value="" selected disabled>Seleccione un cliente</option>
                 </select>
-                <button type="button" id="btnAgregarCliente" onclick="mostrarRegistroCliente()"><i class="fa-solid fa-user-plus"></i> Nuevo
+                <button type="button" id="btnAgregarCliente" onclick="mostrarRegistroCliente()"><i
+                        class="fa-solid fa-user-plus"></i> Nuevo
                     Cliente</button>
             </div>
             <div class="clienteNuevo" id="clienteNuevo">
@@ -132,7 +134,7 @@
                 <label style="margin-left: 5px;" for="descripcionServicio">Descripción</label>
                 <textarea class="descripcionServicio" name="descripcionServicio" id="descripcionServicio"
                     placeholder="Descripcion del servicio a realizar..."></textarea>
-                    <label for="precioServicio">Costo del servicio (sin contar piezas)</label>
+                <label for="precioServicio">Costo del servicio (sin contar piezas)</label>
                 <input type="number" id="precioServicio" oninput="limitarLongitud(this)" class="precioServicio"
                     placeholder="$ Precio del servicio">
 
