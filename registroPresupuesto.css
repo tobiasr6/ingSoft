@@ -263,6 +263,15 @@ h3 {
     border-radius: 5px; /* Bordes redondeados */
     border: 1px solid #ddd; /* Borde gris claro */
 }
+/* Estilos para alinear los grupos de inputs */
+.input-group {
+    display: flex;
+    gap: 30px; /* Espacio entre los inputs de cada grupo */
+}
+
+.input-group div {
+    flex: 1; /* Permite que cada input ocupe el mismo espacio */
+}
 
 .piezasDisponibles{
     max-height: 300px;
@@ -298,12 +307,12 @@ h3 {
     justify-content: flex-end; /* Alinear a la derecha */
 }
 
-#btnCancelar {
+.btnCancelar {
     background-color: #dc3545; /* Color rojo */
     color: #fff; /* Color de texto blanco */
 }
 
-#btnConfirmar {
+.btnConfirmar {
     background-color: #28a745; /* Color verde */
     color: #fff; /* Color de texto blanco */
 }
