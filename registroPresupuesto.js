@@ -11,6 +11,22 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 });
 
+function deshabilitarPiezas(){
+    let selectClientes= document.getElementById("selectClientes").value;
+    if (selectClientes = "Seleccione un cliente") {
+        document.querySelectorAll("#seleccionarPieza").forEach(button => button.disabled = true);
+    } else {
+        document.querySelectorAll("#seleccionarPieza").forEach(button => button.disabled = false);
+    }
+}
+   
+
+//     document.querySelectorAll("#seleccionarPieza").forEach(button => button.style.display = "none");
+//     document.querySelectorAll("#btnEliminarUnidad").forEach(button => button.style.display = "none");
+//     document.querySelectorAll("#btnEliminarPieza").forEach(button => button.style.display = "none");
+// }
+
+
 function limitarLongitud(input) {
     const maxLength = 9;
     if (input.value.length > maxLength) {
@@ -56,14 +72,73 @@ function mostrarFormulario(){
     let botonConfirmar= document.getElementById("btnConfirmar");
     botonConfirmar.style.display="block";
 
-
+    deshabilitarPiezas();
     actualizarTotal();
     mostrarCliente();
     mostrarPiezas();
     actualizarPiezas();
+    verificarClienteSeleccionado();
+    document.getElementById('selectClientes').addEventListener('change', verificarClienteSeleccionado);
     
 }
 
+function nuevoPresupuesto(){
+    let botonNuevoPresupuesto = document.getElementById('btnNuevoPresupuesto');
+    botonNuevoPresupuesto.style.display = 'none';
+    let divForm = document.getElementById('contenido');
+    let boton= document.getElementById('btnMostrarForm')
+    let selectClientes = document.getElementById('selectClientes');
+    selectClientes.style.display = 'block';
+    selectClientes.style.cursor= 'pointer';
+    selectClientes.disabled=false
+    let botonAgregarCliente= document.getElementById('btnAgregarCliente');
+    botonAgregarCliente.style.display = 'block';
+    let descripcion= document.getElementById('descripcionServicio');
+    descripcion.value=""
+    let precio= document.getElementById('precioServicio');
+    precio.value="";
+    divForm.style.display= "block";
+    boton.style.display = "none";
+    piezasSeleccionadas =[];
+    document.querySelectorAll("#seleccionarPieza").forEach(button => button.style.display = "block");
+    document.querySelectorAll("#btnEliminarUnidad").forEach(button => button.style.display = "block");
+    document.querySelectorAll("#btnEliminarPieza").forEach(button => button.style.display = "block");
+    let botonCancelar= document.getElementById("btnCancelar");
+    botonCancelar.style.display="block";
+    let btnDowloadPDF = document.getElementById('btnGenerar');
+    btnDowloadPDF.disabled = true;
+    btnDowloadPDF.style.cursor = "not-allowed";
+    btnDowloadPDF.style.opacity = "0.6"; 
+    let botonConfirmar= document.getElementById("btnConfirmar");
+    botonConfirmar.style.display="block";
+
+    deshabilitarPiezas();
+    actualizarTotal();
+    mostrarCliente();
+    actualizarPiezas();
+    verificarClienteSeleccionado();
+    document.getElementById('selectClientes').addEventListener('change', verificarClienteSeleccionado);
+    
+}
+
+function verificarClienteSeleccionado() {
+    let selectClientes = document.getElementById('selectClientes');
+    let botonesSeleccionarPieza = document.querySelectorAll("#seleccionarPieza");
+
+    if (selectClientes.value === "") { 
+        botonesSeleccionarPieza.forEach(button => {
+            button.disabled = true;
+            button.style.cursor = "not-allowed";
+            button.style.opacity = "0.6";
+        });
+    } else {
+        botonesSeleccionarPieza.forEach(button => {
+            button.disabled = false;
+            button.style.cursor = "pointer";
+            button.style.opacity = "1";
+        });
+    }
+}
 
 
 function mostrarRegistroCliente(){
@@ -691,7 +766,7 @@ function registrarCliente(event){
 
     clientes.push(newCliente);
     Swal.fire("Exito", "Cliente Registrado con exito");
-    mostrarFormulario();
+    nuevoPresupuesto();
     ocultarRegistroCliente();
 }
 
@@ -825,7 +900,7 @@ let cancelarPresupuesto = () => {
             clienteSelect = 'Seleccione un cliente';
             mostrarCliente();
             piezasSeleccionadas = [];
-            mostrarPiezas();
+            actualizarPiezas();
             montoReparacionFinal = 0;
             ocultarRegistroCliente();
             let descripcion= document.getElementById('descripcionServicio')
@@ -833,7 +908,10 @@ let cancelarPresupuesto = () => {
             let precioServicio=document.getElementById('precioServicio');
             precioServicio.value="";
             actualizarTotal();
-            actualizarPiezas();
+            verificarClienteSeleccionado();
+            document.getElementById('selectClientes').addEventListener('change', verificarClienteSeleccionado);
+
+
             // let divContenido = document.getElementById('contenido');
             // divContenido.style.display = 'block';
             // let divFormCliente = document.getElementById('clienteNuevo');

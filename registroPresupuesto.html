@@ -94,7 +94,7 @@
     <div class="button-container">
         <button id="btnMostrarForm" onclick="mostrarFormulario()">Registrar Presupuesto</button>
     </div>
-    <button id="btnNuevoPresupuesto" class="btnNuevoPresupuesto">Nuevo Presupuesto</button>
+    <button id="btnNuevoPresupuesto" onclick="nuevoPresupuesto()" class="btnNuevoPresupuesto">Nuevo Presupuesto</button>
     <div class="contenido" id="contenido">
         <div class="contenedorGral">
             <div id="selectorCliente" class="selectorCliente">
@@ -102,7 +102,7 @@
                 <select name="selectClientes" id="selectClientes">
                     <option value="" selected disabled>Seleccione un cliente</option>
                 </select>
-                <button type="button" id="btnAgregarCliente" onclick="mostrarRegistroCliente()"><i
+                <button type="button" id="btnAgregarCliente" class="btnNuevoCliente" onclick="mostrarRegistroCliente()"><i
                         class="fa-solid fa-user-plus"></i> Nuevo
                     Cliente</button>
             </div>
@@ -138,9 +138,9 @@
                             <input type="date" class="fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento" required>
                         </div>
                     </div>
-            
-                    <button type="reset" class="btnCancelar" id="btnCancelarr" onclick="ocultarRegistroCliente()">Cancelar</button>
-                    <button type="submit" class="btnConfirmar">Enviar</button>
+                    <div class="botonesCliente"><button type="reset" class="btnCancelar" id="btnCancelarr" onclick="ocultarRegistroCliente()">Cancelar</button>
+                        <button type="submit" class="btnConfirmar">Enviar</button></div>
+                    
                 </form>
             </div>
 
