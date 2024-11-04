@@ -36,7 +36,7 @@ function limitarLongitud(input) {
 
 
 function actualizarMonto() {
-    console.log("Actualizando monto...");
+    // console.log("Actualizando monto...");
     actualizarTotal(); 
 }
 document.getElementById("precioServicio").addEventListener("input", actualizarMonto);
@@ -154,7 +154,7 @@ function mostrarRegistroCliente(){
     fechaNacimiento.value=""
     let mail= document.getElementById("mail")
     mail.value=""
-    console.log("cliente mostrado")
+    // console.log("cliente mostrado")
     let divRegistroCliente = document.getElementById('clienteNuevo');
     divRegistroCliente.style.display = 'block';
 }
@@ -437,11 +437,11 @@ let mostrarCliente=()=> {
         const clienteId = select.value; // Obtener el valor seleccionado
         if (clienteId) { // Asegurarse de que se seleccionó un cliente
             clienteSelect = clientes.find((client) => client.id == clienteId); // Buscar el cliente por ID
-            console.log("Cliente seleccionado:", clienteSelect); // Muestra el cliente seleccionado en la consola
+            // console.log("Cliente seleccionado:", clienteSelect); // Muestra el cliente seleccionado en la consola
             habilitarInputs(descriServ, precioServ)
         } else {
             clienteSelect = null; // Reiniciar si no hay selección válida
-            console.log("Ningún cliente seleccionado");
+            // console.log("Ningún cliente seleccionado");
         }
     });
 };
@@ -611,7 +611,7 @@ function seleccionarPieza(index) {
     if (piezaExistente) {
         if (piezaExistente.cantidad < pieza.stock) {
             piezaExistente.cantidad += 1; 
-            console.log(`Cantidad actualizada para ${pieza.nombre}: ${piezaExistente.cantidad}`);
+            // console.log(`Cantidad actualizada para ${pieza.nombre}: ${piezaExistente.cantidad}`);
         } else {
             Swal.fire({
                 icon: 'error',
@@ -623,7 +623,7 @@ function seleccionarPieza(index) {
         if (pieza.stock > 0) {
             piezasSeleccionadas.push({ ...pieza, cantidad: 1 }); 
         
-            console.log("Pieza seleccionada:", pieza);
+            // console.log("Pieza seleccionada:", pieza);
             
         } else {
             Swal.fire({
@@ -634,7 +634,7 @@ function seleccionarPieza(index) {
         }
     }
 
-    console.log("Array de piezas seleccionadas:", piezasSeleccionadas);
+    // console.log("Array de piezas seleccionadas:", piezasSeleccionadas);
     actualizarPiezas();
     actualizarTotal();
 }
@@ -708,11 +708,11 @@ function eliminarPieza(idPieza) {
     if (piezaExistente) {
         if (piezaExistente.cantidad > 1) {
             piezaExistente.cantidad -= 1; 
-            console.log(`Cantidad reducida para ${piezaExistente.nombre}: ${piezaExistente.cantidad}`);
+            // console.log(`Cantidad reducida para ${piezaExistente.nombre}: ${piezaExistente.cantidad}`);
         } else {
             // Si la cantidad es 1, eliminarla del array
             piezasSeleccionadas = piezasSeleccionadas.filter(pieza => pieza.id !== idPieza);
-            console.log(`Pieza eliminada: ${piezaExistente.nombre}`);
+            // console.log(`Pieza eliminada: ${piezaExistente.nombre}`);
         }
     }
 
@@ -745,7 +745,7 @@ function registrarCliente(event){
     // Verifico si el usuario ya existe
     let resultExist = validarExistenciaUser(data);
 
-    console.log("Datos del formulario:", resultExist);
+    // console.log("Datos del formulario:", resultExist);
     if(resultExist){
         Swal.fire("Atencion", "Ya existe un Cliente registrado con el mail propocionado", "error");
         return 
@@ -849,7 +849,7 @@ let confirmarPresupuesto = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // Si el usuario confirma
-                console.log("Presupuesto confirmado");
+                // console.log("Presupuesto confirmado");
                 let btnDowloadPDF = document.getElementById('btnGenerar');
                 btnDowloadPDF.disabled = false;
                 btnDowloadPDF.style.cursor = "pointer";
@@ -873,10 +873,6 @@ let confirmarPresupuesto = () => {
 
                 
 
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // Si el usuario cancela
-                console.log("Presupuesto cancelado");
-                // Puedes agregar cualquier acción si se cancela
             }
         });
     } else {
@@ -896,7 +892,7 @@ let cancelarPresupuesto = () => {
     }).then((result) => {
         if (result.isConfirmed) {
             // Si el usuario confirma la cancelación
-            console.log("Presupuesto cancelado");
+            // console.log("Presupuesto cancelado");
             clienteSelect = 'Seleccione un cliente';
             mostrarCliente();
             piezasSeleccionadas = [];
@@ -923,11 +919,12 @@ let cancelarPresupuesto = () => {
             btnDowloadPDF.style.cursor = "not-allowed";
             btnDowloadPDF.style.opacity = "0.6"; 
 
+            let divContenido = document.getElementById('contenido');
+            divContenido.style.display = 'none';
+            let boton= document.getElementById('btnMostrarForm')
+            boton.style.display="block";
+
             
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            // Si el usuario elige continuar y no cancelar
-            console.log("Cancelación del presupuesto anulada");
-            // Cualquier acción adicional si no se confirma la cancelación
         }
     });
 };

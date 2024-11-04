@@ -96,14 +96,14 @@
     </div>
     <button id="btnNuevoPresupuesto" onclick="nuevoPresupuesto()" class="btnNuevoPresupuesto">Nuevo Presupuesto</button>
     <div class="contenido" id="contenido">
-        <div class="contenedorGral">
+        <div class="contenedorGral" id="contenedorGral">
             <div id="selectorCliente" class="selectorCliente">
                 <label for="selectClientes"></label>
                 <select name="selectClientes" id="selectClientes">
                     <option value="" selected disabled>Seleccione un cliente</option>
                 </select>
-                <button type="button" id="btnAgregarCliente" class="btnNuevoCliente" onclick="mostrarRegistroCliente()"><i
-                        class="fa-solid fa-user-plus"></i> Nuevo
+                <button type="button" id="btnAgregarCliente" class="btnNuevoCliente"
+                    onclick="mostrarRegistroCliente()"><i class="fa-solid fa-user-plus"></i> Nuevo
                     Cliente</button>
             </div>
             <div class="clienteNuevo" id="clienteNuevo">
@@ -135,12 +135,15 @@
                         </div>
                         <div>
                             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                            <input type="date" class="fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento" required>
+                            <input type="date" class="fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento"
+                                required>
                         </div>
                     </div>
-                    <div class="botonesCliente"><button type="reset" class="btnCancelar" id="btnCancelarr" onclick="ocultarRegistroCliente()">Cancelar</button>
-                        <button type="submit" class="btnConfirmar">Enviar</button></div>
-                    
+                    <div class="botonesCliente"><button type="reset" class="btnCancelar" id="btnCancelarr"
+                            onclick="ocultarRegistroCliente()">Cancelar</button>
+                        <button type="submit" class="btnConfirmar">Enviar</button>
+                    </div>
+
                 </form>
             </div>
 
@@ -179,8 +182,8 @@
                 </p>
             </div>
             <div id="buttonAcciones">
-                <button id="btnConfirmar" class="btnConfirmar" class="btn btn-success" onclick="confirmarPresupuesto()"> <i
-                        class="fa-solid fa-check"></i> Confirmar</button>
+                <button id="btnConfirmar" class="btnConfirmar" class="btn btn-success" onclick="confirmarPresupuesto()">
+                    <i class="fa-solid fa-check"></i> Confirmar</button>
                 <button id="btnGenerar" class="btn btn-primary" onclick="generarPDF()"> <i
                         class="fa-solid fa-download"></i> Generar PDF</button>
                 <button id="btnCancelar" class="btnCancelar" onclick="cancelarPresupuesto()"> <i
